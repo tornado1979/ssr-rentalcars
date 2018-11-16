@@ -1,0 +1,26 @@
+{
+  "name": "ssr-rental-cars",
+  "version": "1.0.0",
+  "description": "react SSR app based on rentalcars.com",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/tornado1979/ssr-rentalcars.git"
+  },
+  "keywords": [
+    "reactjs",
+    "redux",
+    "ssr",
+    "api",
+    "rentalcars"
+  ],
+  "author": "Theodoros Itzaris",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tornado1979/ssr-rentalcars/issues"
+  },
+  "homepage": "https://github.com/tornado1979/ssr-rentalcars#readme"
+}

@@ -1,0 +1,6 @@
+# compiled output
+/build
+/public
+
+# dependencies
+/node_modules
