@@ -7,12 +7,13 @@ import {
 import thunk from 'redux-thunk'
 
 import rootReducers from './combinedReducers'
+import logger from './middlewares/loger'
 
 // initial state coming from the server
 const initialState = window.INITIAL_STATE
 
 const enhancers = []
-const middlewares = [thunk]
+const middlewares = [thunk, logger]
 
 
 if (process.env.NODE_ENV === 'development') {
