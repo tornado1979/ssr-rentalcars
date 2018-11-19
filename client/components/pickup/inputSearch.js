@@ -7,12 +7,13 @@ export const InputSearch = ({
   isFetching,
   label,
   placeholder,
+  value,
 }) => {
   return (
     <form>
       <label htmlFor="searchInput">
         {label}
-        <input id="searchInput" name="searchInput" onChange={changeHandler} placeholder={placeholder} type="text" />
+        <input id="searchInput" name="searchInput" onChange={changeHandler} placeholder={placeholder} type="text" value={value} />
         {isFetching && <Loader />}
       </label>
     </form>
@@ -24,4 +25,5 @@ InputSearch.propTypes = {
   isFetching: propTypes.bool.isRequired,
   label: propTypes.string.isRequired,
   placeholder: propTypes.string.isRequired,
+  value: propTypes.string.isRequired,
 }

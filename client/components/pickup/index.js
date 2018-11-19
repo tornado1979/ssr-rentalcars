@@ -12,12 +12,14 @@ import {
   getItems,
   getIsFetching,
   getNoResultsFound,
+  getSelectedResultItem,
 } from './selectors'
 
 import * as contant from '../../contants'
 
 class PickupLocation extends React.Component {
   state = {
+    itemSelected: false,
     searchString: '',
   }
 
@@ -30,11 +32,27 @@ class PickupLocation extends React.Component {
       searchString, // eslint-disable-line
     } = this.state
     const inputString = ev.target.value
-    this.setState({ searchString: inputString })
+    this.setState({ searchString: inputString, itemSelected: false })
 
     if (inputString.length > 1) {
       getData(inputString) // call API with the search string
     }
+  }
+
+  selectItem = (itemId) => {
+    const {
+      items,
+    } = this.props
+
+    const obj = items.find(item => item.bookingId === itemId)
+
+    const {
+      city,
+      country,
+      region,
+    } = obj
+
+    this.setState({ itemSelected: true, searchString: `${city},${country},${region}` })
   }
 
   render() {
@@ -45,6 +63,7 @@ class PickupLocation extends React.Component {
     } = this.props
 
     const {
+      itemSelected,
       searchString,
     } = this.state
 
@@ -58,11 +77,13 @@ class PickupLocation extends React.Component {
           isFetching={isFetching}
           label={contant.label}
           placeholder={contant.placeholder}
+          value={searchString}
         />
-        {searchString.length > 1 && (
+        {!itemSelected && searchString.length > 1 && (
           <LocationsList
             items={items}
             noResultsFound={noResultsFound}
+            onItemClick={this.selectItem}
           />)}
       </div>
     )
@@ -78,6 +99,7 @@ export { loadData }
 
 const mapStateToProps = (state) => {
   return {
+    SelectedResultItem: (itemId) => getSelectedResultItem(itemId)(state),
     isFetching: getIsFetching(state),
     items: getItems(state),
     noResultsFound: getNoResultsFound(state),
@@ -95,8 +117,8 @@ const mapDispatchToProps = (dispatch) => {
 PickupLocation.propTypes = {
   getData: propTypes.func.isRequired,
   isFetching: propTypes.bool.isRequired,
-  items: propTypes.arrayOf(propTypes.string).isRequired,
-  noResultsFound: propTypes.string.isRequired,
+  items: propTypes.arrayOf(propTypes.shape()).isRequired,
+  noResultsFound: propTypes.oneOfType([propTypes.string, propTypes.bool]).isRequired,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PickupLocation)
