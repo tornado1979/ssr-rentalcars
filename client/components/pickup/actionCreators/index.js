@@ -4,11 +4,18 @@ import * as type from './types'
 
 import { API_SEARCH_ENDPOINT } from '../../../contants'
 
-export const clearResults = () => {
+const clear = () => {
   return {
     payload: [],
     type: type.CLEAR_RESULTS,
   }
+}
+
+// action that clears the results list
+export const clearResults = () => (dispatch) => {
+  return setTimeout(() => {
+    dispatch(clear())
+  }, 300)
 }
 
 export const requestData = () => {

@@ -5,8 +5,7 @@ import { LocationsList } from './locationsList'
 import { InputSearch } from './inputSearch'
 
 import {
-  clearResults,
-  fetchData
+  fetchData,
 } from './actionCreators'
 
 import {
@@ -18,19 +17,23 @@ import {
 import * as contant from '../../contants'
 
 class PickupLocation extends React.Component {
+  state = {
+    searchString: '',
+  }
+
   changeHandler = (ev) => {
     const {
-      items,
-      emptyResults,
       getData,
     } = this.props
 
-    const searchString = ev.target.value
-    if (searchString.length > 2) {
-      getData(searchString) // call API with the search string
-    }
-    if (items.length > 0 && searchString.length === 1) {
-      emptyResults()
+    const {
+      searchString, // eslint-disable-line
+    } = this.state
+    const inputString = ev.target.value
+    this.setState({ searchString: inputString })
+
+    if (inputString.length > 1) {
+      getData(inputString) // call API with the search string
     }
   }
 
@@ -40,6 +43,10 @@ class PickupLocation extends React.Component {
       items,
       noResultsFound,
     } = this.props
+
+    const {
+      searchString,
+    } = this.state
 
     return (
       <div className="pickup-location">
@@ -52,10 +59,11 @@ class PickupLocation extends React.Component {
           label={contant.label}
           placeholder={contant.placeholder}
         />
-        <LocationsList
-          items={items}
-          noResultsFound={noResultsFound}
-        />
+        {searchString.length > 1 && (
+          <LocationsList
+            items={items}
+            noResultsFound={noResultsFound}
+          />)}
       </div>
     )
   }
@@ -78,7 +86,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    emptyResults: () => dispatch(clearResults()),
     getData: (searchString) => {
       dispatch(fetchData(searchString))
     },
@@ -86,7 +93,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 PickupLocation.propTypes = {
-  emptyResults: propTypes.func.isRequired,
   getData: propTypes.func.isRequired,
   isFetching: propTypes.bool.isRequired,
   items: propTypes.arrayOf(propTypes.string).isRequired,
