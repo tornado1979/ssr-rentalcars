@@ -4,6 +4,13 @@ import * as type from './types'
 
 import { API_SEARCH_ENDPOINT } from '../../../contants'
 
+export const clearResults = () => {
+  return {
+    payload: [],
+    type: type.CLEAR_RESULTS,
+  }
+}
+
 export const requestData = () => {
   return {
     payload: {

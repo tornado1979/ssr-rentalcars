@@ -1,15 +1,19 @@
 import * as type from '../actionCreators/types'
 
 const initState = {
-  data: {
-    isFetching: false,
-    items: [],
-  },
+  isFetching: false,
+  items: [],
 }
-
 
 export const reducer = (state = initState, action) => {
   switch (action.type) {
+    case type.CLEAR_RESULTS: {
+      return {
+        ...state,
+        isFetching: false,
+        items: action.payload,
+      }
+    }
     case type.REQUEST_DATA: {
       return {
         ...state,

@@ -4,7 +4,10 @@ import { connect } from 'react-redux'
 import { LocationsList } from './locationsList'
 import { InputSearch } from './inputSearch'
 
-import { fetchData } from './actionCreators'
+import {
+  clearResults,
+  fetchData
+} from './actionCreators'
 
 import {
   getItems,
@@ -17,18 +20,18 @@ import * as contant from '../../contants'
 class PickupLocation extends React.Component {
   changeHandler = (ev) => {
     const {
+      items,
+      emptyResults,
       getData,
-      isFetching,
     } = this.props
 
     const searchString = ev.target.value
-    // Request the API andpoint when is not fetching data
-    if (!isFetching) {
-      if (searchString.length > 2) {
-        getData(searchString) // call API with the search string
-      }
+    if (searchString.length > 2) {
+      getData(searchString) // call API with the search string
     }
-    return false
+    if (items.length > 0 && searchString.length === 1) {
+      emptyResults()
+    }
   }
 
   render() {
@@ -58,8 +61,9 @@ class PickupLocation extends React.Component {
   }
 }
 
+// I leave it here, in case we need to dispatch fetchData server side.
 const loadData = (store) => {
-  return store.dispatch(fetchData('London'))
+  return store.dispatch(fetchData(''))
 }
 
 export { loadData }
@@ -74,6 +78,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    emptyResults: () => dispatch(clearResults()),
     getData: (searchString) => {
       dispatch(fetchData(searchString))
     },
@@ -81,6 +86,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 PickupLocation.propTypes = {
+  emptyResults: propTypes.func.isRequired,
   getData: propTypes.func.isRequired,
   isFetching: propTypes.bool.isRequired,
   items: propTypes.arrayOf(propTypes.string).isRequired,
