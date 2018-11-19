@@ -10,6 +10,6 @@ export const getItems = createSelector(
 export const getIsFetching = createSelector(
   getLocalState,
   data => {
-    return data && data.isFetching
+    return (data && data.isFetching) || false
   },
 )

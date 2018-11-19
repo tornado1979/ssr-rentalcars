@@ -10,6 +10,7 @@ $border2: 0.2rem solid #DAB129;
 $pickup-location-bg: #F3CE56;
 $font-color: rgb(68, 68, 68);
 $pickup-container-bg: #fff;
+$items-list-bg: #fff;
 
 html {
   font-size: 10px;
@@ -128,19 +129,14 @@ footer {
     font-size: 3rem;
   }
 
-  & label {
-    display: grid;
+  label {
     position: relative;
-    color: $font-color;
-    line-height: 3rem;
-    font-size: 1.4rem;
 
     & .loader {
       position: absolute;
-      top: 3.4rem;
+      top: 2.2rem;
+      right: 1rem;
       display: inline-grid;
-      justify-self: end;
-      padding-right: 1rem;
 
       & img {
         width: 3.2rem;
@@ -158,5 +154,49 @@ footer {
     font-size: 1.4rem;
     padding: 1.2rem 3.88rem 1.2rem 0.97rem;
     width: 100%;
+  }
+
+  .items-list {
+    background-color: $items-list-bg;
+    list-style-type: none;
+    padding: 0;
+    box-shadow: 0 0.2rem 0.2rem rgba(0,0,0,0.4);
+    margin-top: 0;
+
+    li {
+      border-radius: 2px;
+      border-bottom: 1px solid #eaeaea;
+      padding: 1rem;
+
+      .left {
+        display: inline-block;
+        vertical-align: middle;
+        border: 1px solid transparent;
+        float: none;
+        background-color: #f2817f;
+        min-width: 50px;
+        margin: 2px 10px 0 0;
+        padding: 3px 5px;
+        border-radius: 3px;
+        text-align: center;
+        font-weight: bold;
+        color: #fff;
+        font-weight: 400;
+        font-size: 85%;
+      }
+
+      .right {
+        display: inline-block;
+        vertical-align: middle;
+
+        .region {
+          display: block;
+          font-weight: 400;
+          color: gray;
+          display: block;
+          font-size: 85%;
+        }
+      }
+    }
   }
 }
