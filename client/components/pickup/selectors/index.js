@@ -17,6 +17,6 @@ export const getIsFetching = createSelector(
 export const getNoResultsFound = createSelector(
   getItems,
   data => {
-    return data.length === 1 && !data.bookingId ? data[0].name && data[0].name : null
+    return data.length === 1 && !data.bookingId ? data[0].name && data[0].name : false
   },
 )

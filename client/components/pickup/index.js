@@ -12,7 +12,6 @@ import {
   getItems,
   getIsFetching,
   getNoResultsFound,
-  getSelectedResultItem,
 } from './selectors'
 
 import * as contant from '../../contants'
@@ -99,7 +98,6 @@ export { loadData }
 
 const mapStateToProps = (state) => {
   return {
-    SelectedResultItem: (itemId) => getSelectedResultItem(itemId)(state),
     isFetching: getIsFetching(state),
     items: getItems(state),
     noResultsFound: getNoResultsFound(state),
