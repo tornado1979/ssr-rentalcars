@@ -47,12 +47,12 @@ class PickupLocation extends React.Component {
     const obj = items.find(item => item.bookingId === itemId)
 
     const {
-      city,
       country,
+      name,
       region,
     } = obj
 
-    this.setState({ itemSelected: true, searchString: `${city},${country},${region}` })
+    this.setState({ itemSelected: true, searchString: `${name},${country},${region}` })
   }
 
   render() {
