@@ -1,28 +1,48 @@
 import React from 'react'
+import propTypes from 'prop-types'
 
-const locationsList = (items) => {
-  const stripBookingId = (bookingId) => bookingId.split('-')[0]
+export const LocationsList = (props) => {
+  const {
+    items,
+    noResultsFound,
+  } = props
 
-  const listItems = items.items.map(item => (
-    <li key={item.bookingId}>
-      <div className="left bookingId">{stripBookingId(item.bookingId)}</div>
-      <div className="right">
-        <span className="name">
-          {item.name}
-        </span>
-        <span className="region">
-          {item.region}
-          ,
-          {item.country}
-        </span>
-      </div>
-    </li>
-  ))
+  function getListItems() {
+    const stripBookingId = (bookingId) => bookingId.split('-')[0]
+
+    const listItems = items.map(item => (
+      <li key={item.bookingId}>
+        <div className={`left bookingId ${stripBookingId(item.bookingId)}`}>{stripBookingId(item.bookingId)}</div>
+        <div className="right">
+          <span className="name">
+            {item.name}
+          </span>
+          <span className="region">
+            {item.region}
+            ,
+            {item.country}
+          </span>
+          {item.isPopular && (
+            <span className="popular">
+                Popular
+            </span>
+          )}
+        </div>
+      </li>
+    ))
+
+    return listItems
+  }
+
   return (
     <ul className="items-list">
-      {listItems}
+      {items.length > 0 && !noResultsFound && getListItems()}
+      {items.length > 0 && noResultsFound && <li>{noResultsFound}</li>}
     </ul>
   )
 }
 
-export const LocationsList = locationsList
+LocationsList.propTypes = {
+  items: propTypes.arrayOf(propTypes.string).isRequired,
+  noResultsFound: propTypes.string.isRequired,
+}

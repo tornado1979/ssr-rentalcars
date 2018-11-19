@@ -9,6 +9,7 @@ import { fetchData } from './actionCreators'
 import {
   getItems,
   getIsFetching,
+  getNoResultsFound,
 } from './selectors'
 
 import * as contant from '../../contants'
@@ -34,6 +35,7 @@ class PickupLocation extends React.Component {
     const {
       isFetching,
       items,
+      noResultsFound,
     } = this.props
 
     return (
@@ -49,6 +51,7 @@ class PickupLocation extends React.Component {
         />
         <LocationsList
           items={items}
+          noResultsFound={noResultsFound}
         />
       </div>
     )
@@ -65,6 +68,7 @@ const mapStateToProps = (state) => {
   return {
     isFetching: getIsFetching(state),
     items: getItems(state),
+    noResultsFound: getNoResultsFound(state),
   }
 }
 
@@ -80,6 +84,7 @@ PickupLocation.propTypes = {
   getData: propTypes.func.isRequired,
   isFetching: propTypes.bool.isRequired,
   items: propTypes.arrayOf(propTypes.string).isRequired,
+  noResultsFound: propTypes.string.isRequired,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PickupLocation)
