@@ -14,8 +14,25 @@ import {
 import * as contant from '../../contants'
 
 class PickupLocation extends React.Component {
+  changeHandler = (ev) => {
+    const {
+      getData,
+      isFetching,
+    } = this.props
+
+    const searchString = ev.target.value
+    // Request the API andpoint when is not fetching data
+    if (!isFetching) {
+      if (searchString.length > 2) {
+        getData(searchString) // call API with the search string
+      }
+    }
+    return false
+  }
+
   render() {
     const {
+      isFetching,
       items,
     } = this.props
 
@@ -25,7 +42,8 @@ class PickupLocation extends React.Component {
           Where are you going?
         </h2>
         <InputSearch
-          isFetching
+          changeHandler={(ev) => this.changeHandler(ev)}
+          isFetching={isFetching}
           label={contant.label}
           placeholder={contant.placeholder}
         />
@@ -59,6 +77,8 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 PickupLocation.propTypes = {
+  getData: propTypes.func.isRequired,
+  isFetching: propTypes.bool.isRequired,
   items: propTypes.arrayOf(propTypes.string).isRequired,
 }
 
