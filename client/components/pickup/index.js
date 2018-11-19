@@ -83,6 +83,7 @@ class PickupLocation extends React.Component {
             items={items}
             noResultsFound={noResultsFound}
             onItemClick={this.selectItem}
+            searchString={searchString}
           />)}
       </div>
     )
