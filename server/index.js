@@ -21,6 +21,10 @@ app.get('*', (req, res) => {
     const context = {}
     const content = renderer(req, store, context)
 
+    if (context.notFound) {
+      res.status(404)
+    }
+
     return res.send(content)
   })
 })
