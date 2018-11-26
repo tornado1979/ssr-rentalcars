@@ -3,6 +3,7 @@ import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { renderRoutes } from 'react-router-config'
+import { Helmet } from 'react-helmet'
 import serialize from 'serialize-javascript'
 
 import Routes from '../../client/components/Router/routes'
@@ -15,15 +16,17 @@ export default (req, store, context = {}) => {
       </StaticRouter>
     </Provider>,
   )
+  const helmet = Helmet.renderStatic()
 
   return (
     `<!DOCTYPE html>
-    <html>
+    <html ${helmet.htmlAttributes.toString()}>
       <head>
         <meta charset="UTF-8">
-        <title>Server Side render application</title>
+        ${helmet.title.toString()}
+        ${helmet.meta.toString()}
       </head>
-     <body>
+     <body ${helmet.bodyAttributes.toString()}>
        <div id="root">${content}</div>
        <script>
          window.INITIAL_STATE = ${serialize(store.getState())}

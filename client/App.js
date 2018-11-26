@@ -19,5 +19,11 @@ export default {
 }
 
 App.propTypes = {
-  route: propTypes.shape().isRequired,
+  route: propTypes.shape({
+    component: propTypes.func,
+    routes: propTypes.arrayOf(propTypes.shape({
+      component: propTypes.func,
+      path: propTypes.string,
+    })),
+  }).isRequired,
 }
