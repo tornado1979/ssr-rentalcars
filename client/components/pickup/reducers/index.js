@@ -3,21 +3,22 @@ import * as type from '../actionCreators/types'
 const initState = {
   isFetching: false,
   items: [],
+  searchString: '',
 }
 
 export const reducer = (state = initState, action) => {
   switch (action.type) {
     case type.CLEAR_RESULTS: {
       return {
-        ...state,
         isFetching: false,
-        items: action.payload,
+        items: action.payload.items,
+        searchString: action.payload.searchString,
       }
     }
     case type.REQUEST_DATA: {
       return {
         ...state,
-        isFetching: action.payload.isFetching,
+        ...action.payload,
       }
     }
     case type.RECEIVE_DATA_SUCCESS: {

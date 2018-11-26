@@ -4,24 +4,26 @@ import * as type from './types'
 
 import { API_SEARCH_ENDPOINT } from '../../../contants'
 
-const clear = () => {
+const clear = (searchString) => {
   return {
-    payload: [],
+    payload: {
+      items: [],
+      searchString,
+    },
     type: type.CLEAR_RESULTS,
   }
 }
 
 // action that clears the results list
-export const clearResults = () => (dispatch) => {
-  return setTimeout(() => {
-    dispatch(clear())
-  }, 300)
+export const clearResults = (searchString) => {
+  return clear(searchString)
 }
 
-export const requestData = () => {
+export const requestData = (searchString) => {
   return {
     payload: {
       isFetching: true,
+      searchString,
     },
     type: type.REQUEST_DATA,
   }
@@ -48,11 +50,11 @@ export const receiveDataFail = (error) => {
 }
 
 export const fetchData = (searchString = 'London') => async (dispatch) => {
-  dispatch(requestData())
+  dispatch(requestData(searchString))
 
   try {
     const res = await axios.get(`${API_SEARCH_ENDPOINT}${searchString}`)
-    // const data = await response.json()
+
     dispatch(receiveDataSuccess(res))
   } catch (error) {
     console.log(error)

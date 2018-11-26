@@ -5,6 +5,7 @@ import { LocationsList } from './locationsList'
 import { InputSearch } from './inputSearch'
 
 import {
+  clearResults,
   fetchData,
 } from './actionCreators'
 
@@ -24,6 +25,7 @@ class PickupLocation extends React.Component {
 
   changeHandler = (ev) => {
     const {
+      emptyResults,
       getData,
     } = this.props
 
@@ -35,6 +37,9 @@ class PickupLocation extends React.Component {
 
     if (inputString.length > 1) {
       getData(inputString) // call API with the search string
+    } else if (inputString.length === 1) {
+      // dispatch action  EMPTY_RESULTS
+      emptyResults(inputString)
     }
   }
 
@@ -78,13 +83,14 @@ class PickupLocation extends React.Component {
           placeholder={contant.placeholder}
           value={searchString}
         />
-        {!itemSelected && searchString.length > 1 && (
+        {!itemSelected && (
           <LocationsList
             items={items}
             noResultsFound={noResultsFound}
             onItemClick={this.selectItem}
             searchString={searchString}
-          />)}
+          />
+        )}
       </div>
     )
   }
@@ -107,6 +113,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    emptyResults: (inputString) => dispatch(clearResults(inputString)),
     getData: (searchString) => {
       dispatch(fetchData(searchString))
     },
@@ -114,6 +121,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 PickupLocation.propTypes = {
+  emptyResults: propTypes.func.isRequired,
   getData: propTypes.func.isRequired,
   isFetching: propTypes.bool.isRequired,
   items: propTypes.arrayOf(propTypes.shape()).isRequired,
