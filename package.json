@@ -4,6 +4,7 @@
   "description": "react SSR app based on rentalcars.com",
   "main": "server/index.js",
   "scripts": {
+    "start": "npm-run-all -p dev:*",
     "dev": "npm-run-all -p dev:*",
     "dev:server": "nodemon --watch build --exec node build/bundle.js",
     "dev:build-server": "webpack --config webpack.server.js --watch",
