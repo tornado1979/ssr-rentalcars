@@ -1,6 +1,7 @@
 import React from 'react'
 import propTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Helmet } from 'react-helmet'
 import { LocationsList } from './locationsList'
 import { InputSearch } from './inputSearch'
 
@@ -68,9 +69,14 @@ class PickupLocation extends React.Component {
 
     return (
       <div className="pickup-location">
-        <h2 className="title">
-          Where are you going?
-        </h2>
+        {itemSelected
+          && (
+            <Helmet>
+              <title>{`${searchString}`}</title>
+              <meta content={`${searchString}`} property="og:title" />
+            </Helmet>
+          )}
+        <h2 className="title">Where are you going?</h2>
         <InputSearch
           changeHandler={(ev) => this.changeHandler(ev)}
           isFetching={isFetching}
