@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import propTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
@@ -17,32 +17,30 @@ import {
 
 import * as contant from '../../contants'
 
-class PickupLocation extends React.Component {
-  state = {
-    itemSelected: false,
-    searchString: '',
-  }
+const PickupLocation = (props) => {
+  const [itemSelected, setItemSelected] = useState(false)
+  const [searchString, setSearchString] = useState('')
 
-  changeHandler = (ev) => {
+  const changeHandler = (ev) => {
     const {
       getData,
-    } = this.props
+    } = props
 
-    const {
-      searchString, // eslint-disable-line
-    } = this.state
     const inputString = ev.target.value
-    this.setState({ searchString: inputString, itemSelected: false })
+
+    // update localstate
+    setSearchString(inputString)
+    setItemSelected(false)
 
     if (inputString.length > 1) {
       getData(inputString) // call API with the search string
     }
   }
 
-  selectItem = (itemId) => {
+  const selectItem = (itemId) => {
     const {
       items,
-    } = this.props
+    } = props
 
     const obj = items.find(item => item.bookingId === itemId)
 
@@ -52,48 +50,43 @@ class PickupLocation extends React.Component {
       region,
     } = obj
 
-    this.setState({ itemSelected: true, searchString: `${name},${country},${region}` })
+    // update localstate
+    setSearchString(`${name},${country},${region}`)
+    setItemSelected(true)
   }
 
-  render() {
-    const {
-      isFetching,
-      items,
-      noResultsFound,
-    } = this.props
+  const {
+    isFetching,
+    items,
+    noResultsFound,
+  } = props
 
-    const {
-      itemSelected,
-      searchString,
-    } = this.state
-
-    return (
-      <div className="pickup-location">
-        {itemSelected
-          && (
-            <Helmet>
-              <title>{`${searchString}`}</title>
-              <meta content={`${searchString}`} property="og:title" />
-            </Helmet>
-          )}
-        <h2 className="title">Where are you going?</h2>
-        <InputSearch
-          changeHandler={(ev) => this.changeHandler(ev)}
-          isFetching={isFetching}
-          label={contant.label}
-          placeholder={contant.placeholder}
-          value={searchString}
-        />
-        {!itemSelected && searchString.length > 1 && (
-          <LocationsList
-            items={items}
-            noResultsFound={noResultsFound}
-            onItemClick={this.selectItem}
-            searchString={searchString}
-          />)}
-      </div>
-    )
-  }
+  return (
+    <div className="pickup-location">
+      {itemSelected
+        && (
+          <Helmet>
+            <title>{`${searchString}`}</title>
+            <meta content={`${searchString}`} property="og:title" />
+          </Helmet>
+        )}
+      <h2 className="title">Where are you going?</h2>
+      <InputSearch
+        changeHandler={(ev) => changeHandler(ev)}
+        isFetching={isFetching}
+        label={contant.label}
+        placeholder={contant.placeholder}
+        value={searchString}
+      />
+      {!itemSelected && searchString.length > 1 && (
+        <LocationsList
+          items={items}
+          noResultsFound={noResultsFound}
+          onItemClick={selectItem}
+          searchString={searchString}
+        />)}
+    </div>
+  )
 }
 
 // I leave it here, in case we need to dispatch fetchData server side.
