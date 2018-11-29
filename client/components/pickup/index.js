@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import propTypes from 'prop-types'
-import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
+import { connect } from 'react-redux'
 import { LocationsList } from './locationsList'
 import { InputSearch } from './inputSearch'
 
@@ -37,6 +37,17 @@ const PickupLocation = (props) => {
     }
   }
 
+  useEffect(() => {
+    if (itemSelected) {
+      const pick = document.getElementsByClassName('pickup-location')[0]
+      // add animation class to the component
+      pick.classList.add('animate-border')
+
+      // after 0.5s, remove the animation class
+      setTimeout(() => pick.classList.remove('animate-border'), 500)
+    }
+  }, [itemSelected])
+
   const selectItem = (itemId) => {
     const {
       items,
@@ -66,8 +77,8 @@ const PickupLocation = (props) => {
       {itemSelected
         && (
           <Helmet>
-            <title>{`${searchString}`}</title>
-            <meta content={`${searchString}`} property="og:title" />
+            <title>{`${searchString} - rentalcars`}</title>
+            <meta content={`${searchString} - rentalcars`} property="og:title" />
           </Helmet>
         )}
       <h2 className="title">Where are you going?</h2>
