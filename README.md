@@ -3,6 +3,7 @@
 - [Table of Contents](#table-of-contents)
 - [About](#about)
 - [Workflow](#workflow)
+- [Hooks](#hooks)
 - [devtools](#devtools)
 - [Folder structure](#folder-structure)
 - [Run local](#run-local)
@@ -22,6 +23,7 @@
 
 * It is written in reactjs + reduxjs mainly and also:
 - react ^16.7.0-alpha.2
+- hooks 'useState', 'useEffect'
 - eslint with airbnb-config rules
 - webpack 4
 - babel 7
@@ -37,6 +39,16 @@
 
 ![INITIAL_STATE on client](readme_imgs/init_state-passed_from_server.png)
 
+## Hooks
+
+In the application i use react ^16.7.0-alpha.2, in order to make use of hooks:
+* PickupLocation component is converted, from class component, to functional component and its state is handled by 'useState' hook.
+  
+![converted class component to functional](readme_imgs/functional-component.png)
+
+* The 'useEffect' hook handles side effect, when user clicks on a list value, a border animation is triggered around the PickupLocation component.
+
+![side effect border animation ](readme_imgs/animation.gif)
 ## devtools
 
 - Redux devtools are enabled and all the actions and the current state are logged and displayed, in realime.
