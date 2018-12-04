@@ -1,5 +1,6 @@
 @import "./variables.scss";
 @import "./keyframes.scss";
+@import "./breakpoints.scss";
 
 html {
   font-size: 10px;
@@ -112,6 +113,18 @@ footer {
   margin-top: -15rem;
   margin-left: 10%;
   border-bottom: $border2;
+
+  @media screen and (max-width: $screen-sm) {
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  @media screen and (max-width: $screen-xs) {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
   &.animate-border {
     background-repeat: no-repeat;
