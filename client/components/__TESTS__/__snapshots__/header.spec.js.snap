@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component header should render component corectly 1`] = `
+<header>
+  <nav
+    className="navBar"
+  >
+    <div
+      className="title"
+    >
+      <div
+        className="logo"
+      />
+    </div>
+  </nav>
+</header>
+`;
