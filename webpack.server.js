@@ -3,7 +3,6 @@ const webpackNodeExternals = require('webpack-node-externals')
 
 module.exports = {
   target: 'node',
-  mode: 'development',
   entry: './server/index.js',
   output: {
     filename: 'bundle.js',
@@ -24,7 +23,15 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
         options: {
-          presets: ['@babel/preset-react', '@babel/preset-env'],
+          presets: [
+            'react',
+            'stage-0',
+            ['env', {
+              targets:
+                { browsers: ['last 2 versions'] },
+            },
+            ],
+          ],
         },
       },
     ],
