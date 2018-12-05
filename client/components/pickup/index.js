@@ -23,6 +23,7 @@ const PickupLocation = (props) => {
   const [inputValue, setInputValue] = useState('') // input string & the selected value, when the user clicks on a list item
 
   const clickHandler = () => {
+    setItemSelected(false)
     setInputValue(searchString)
   }
 
@@ -83,8 +84,8 @@ const PickupLocation = (props) => {
       {itemSelected
         && (
           <Helmet>
-            <title>{`${searchString} - rentalcars`}</title>
-            <meta content={`${searchString} - rentalcars`} property="og:title" />
+            <title>{`${inputValue} - rentalcars`}</title>
+            <meta content={`${inputValue} - rentalcars`} property="og:title" />
           </Helmet>
         )}
       <h2 className="title">Where are you going?</h2>
