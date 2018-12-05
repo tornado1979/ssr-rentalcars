@@ -55,6 +55,30 @@ header {
     font-size: 1.6rem;
   }
 
+  .navbar-nav {
+    margin-top: auto;
+    margin-left: auto;
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  .nav-item {
+    display: inline-block;
+    margin-top: auto;
+    margin-right: 1rem;
+
+    .active {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    a {
+      color: lightgrey;
+    }
+
+  }
+
+
   .title {
     margin: auto 0;
 
@@ -254,4 +278,12 @@ footer {
       }
     }
   }
+}
+
+/* About page*/
+.about-container {
+  flex: 1;
+  max-width: 80%;
+  padding: 4rem;
+  border: 1px solid lightgray;
 }

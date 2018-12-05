@@ -1,4 +1,4 @@
-import '@babel/polyfill'
+import 'babel-polyfill'
 import express from 'express'
 import { matchRoutes } from 'react-router-config'
 import createStore from './helpers/createStore'
@@ -26,7 +26,7 @@ app.get('*', (req, res) => {
     }
 
     return res.send(content)
-  })
+  }).catch(error => res.status(500).send(`Internal Server Error:, ${error}`))
 })
 
 app.listen(PORT, () => console.log('Server is listening on PORT ', PORT))
