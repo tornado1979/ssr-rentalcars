@@ -2,10 +2,10 @@ const path = require('path')
 const autoprefixer = require('autoprefixer')
 const eslintFormatter = require('react-dev-utils/eslintFormatter')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
 
 module.exports = {
   entry: './client/index.js',
-  mode: 'development',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'public'),
@@ -45,7 +45,13 @@ module.exports = {
             exclude: /node_modules/,
             options: {
               presets: [
-                '@babel/preset-react', '@babel/preset-env',
+                'react',
+                'stage-0',
+                ['env', {
+                  targets:
+                    { browsers: ['last 2 versions'] },
+                },
+                ],
               ],
             },
           },
@@ -108,6 +114,9 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: 'template.html',
+    }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"development"',
     }),
   ],
 }

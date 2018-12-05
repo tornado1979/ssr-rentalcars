@@ -30,13 +30,11 @@ export const LocationsList = (props) => {
               })}
               <span className="region">
                 {item.region}
-                ,
+                <span>,</span>
                 {item.country}
               </span>
               {item.isPopular && (
-                <span className="popular">
-                    Popular
-                </span>
+                <span className="popular">Popular</span>
               )}
             </div>
           </div>

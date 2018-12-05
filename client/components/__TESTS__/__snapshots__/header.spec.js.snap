@@ -12,6 +12,32 @@ exports[`Component header should render component corectly 1`] = `
         className="logo"
       />
     </div>
+    <ul
+      className="navbar-nav"
+    >
+      <li
+        className="nav-item"
+      >
+        <a
+          aria-current={false}
+          href="/home"
+          onClick={[Function]}
+        >
+          Home
+        </a>
+      </li>
+      <li
+        className="nav-item"
+      >
+        <a
+          aria-current={false}
+          href="/about"
+          onClick={[Function]}
+        >
+          About
+        </a>
+      </li>
+    </ul>
   </nav>
 </header>
 `;
