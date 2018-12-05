@@ -19,7 +19,12 @@ import * as contant from '../../contants'
 
 const PickupLocation = (props) => {
   const [itemSelected, setItemSelected] = useState(false)
-  const [searchString, setSearchString] = useState('')
+  const [searchString, setSearchString] = useState('') // the string that the user types
+  const [inputValue, setInputValue] = useState('') // input string & the selected value, when the user clicks on a list item
+
+  const clickHandler = () => {
+    setInputValue(searchString)
+  }
 
   const changeHandler = (ev) => {
     const {
@@ -30,6 +35,7 @@ const PickupLocation = (props) => {
 
     // update localstate
     setSearchString(inputString)
+    setInputValue(inputString)
     setItemSelected(false)
 
     if (inputString.length > 1) {
@@ -62,7 +68,7 @@ const PickupLocation = (props) => {
     } = obj
 
     // update localstate
-    setSearchString(`${name},${country},${region}`)
+    setInputValue(`${name},${country},${region}`)
     setItemSelected(true)
   }
 
@@ -87,7 +93,8 @@ const PickupLocation = (props) => {
         isFetching={isFetching}
         label={contant.label}
         placeholder={contant.placeholder}
-        value={searchString}
+        value={inputValue}
+        click={clickHandler}
       />
       {!itemSelected && searchString.length > 1 && (
         <LocationsList

@@ -4,6 +4,7 @@ import { Loader } from './loader'
 
 export const InputSearch = ({
   changeHandler,
+  click,
   isFetching,
   label,
   placeholder,
@@ -13,7 +14,7 @@ export const InputSearch = ({
     <form>
       <label htmlFor="searchInput">
         {label}
-        <input id="searchInput" name="searchInput" onChange={changeHandler} placeholder={placeholder} type="text" value={value} />
+        <input id="searchInput" name="searchInput" onChange={changeHandler} onClick={click} placeholder={placeholder} type="text" value={value} />
         {isFetching && <Loader />}
       </label>
     </form>
@@ -22,6 +23,7 @@ export const InputSearch = ({
 
 InputSearch.propTypes = {
   changeHandler: propTypes.func.isRequired,
+  click: propTypes.func.isRequired,
   isFetching: propTypes.bool.isRequired,
   label: propTypes.string.isRequired,
   placeholder: propTypes.string.isRequired,
