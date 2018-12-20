@@ -20,30 +20,33 @@ import * as contant from '../../contants'
 const PickupLocation = (props) => {
   const [itemSelected, setItemSelected] = useState(false)
   const [searchString, setSearchString] = useState('') // the string that the user types
-  const [inputValue, setInputValue] = useState('') // input string & the selected value, when the user clicks on a list item
+  const [inputValue, setInputValue] = useState('') // input string & the selected value, when the user clicks on a list items
 
   const clickHandler = () => {
     setItemSelected(false)
     setInputValue(searchString)
   }
 
-  const changeHandler = (ev) => {
-    const {
-      getData,
-    } = props
-
-    const inputString = ev.target.value
+  function changeHandler(ev) {
+    const inputString = ev
 
     // update localstate
     setSearchString(inputString)
     setInputValue(inputString)
     setItemSelected(false)
+  }
 
-    if (inputString.length > 1) {
-      getData(inputString) // call API with the search string
+  const requestData = () => {
+    const {
+      getData,
+    } = props
+
+    if (searchString.length > 1) {
+      getData(searchString) // call API with the search string
     }
   }
 
+  // display the animation border, around the pickuplocation component
   useEffect(() => {
     if (itemSelected) {
       const pick = document.getElementsByClassName('pickup-location')[0]
@@ -90,14 +93,15 @@ const PickupLocation = (props) => {
         )}
       <h2 className="title">Where are you going?</h2>
       <InputSearch
-        changeHandler={(ev) => changeHandler(ev)}
+        changeHandler={changeHandler}
         isFetching={isFetching}
         label={contant.label}
         placeholder={contant.placeholder}
+        requestData={requestData}
         value={inputValue}
         click={clickHandler}
       />
-      {!itemSelected && searchString.length > 1 && (
+      {(!itemSelected) && searchString.length > 1 && (
         <LocationsList
           items={items}
           noResultsFound={noResultsFound}

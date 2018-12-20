@@ -12,11 +12,17 @@ const About = (props) => {
     <main style={{ height: '100%', alignItems: 'center' }}>
       <Head location={location} route={route} />
       <div className="about-container">
-          Lorem ipsum dolor sit amet, natum persius consetetur eos ea, mei eirmod moderatius mediocritatem an. Ut duo oratio virtute pertinacia. Per no prima oporteat adipisci. Eum te augue gubergren. Mel volutpat expetenda ex, wisi iusto mea at. Duo saperet epicurei delectus ut, mel falli aperiam imperdiet eu. In simul dolor decore vix, ne graeco argumentum pri.
+        {`Lorem ipsum dolor sit amet, natum persius consetetur eos ea, mei eirmod moderatius mediocritatem an.
+           Ut duo oratio virtute pertinacia. Per no prima oporteat adipisci. Eum te augue gubergren. Mel volutpat expetenda ex,
+            wisi iusto mea at. Duo saperet epicurei delectus ut, mel falli aperiam imperdiet eu. In simul dolor decore vix, ne graeco
+             argumentum pri.
 
-Meis fugit no has, eam at omittam delectus. Congue perpetua cotidieque ei cum, pro homero fierent incorrupte eu. Eu incorrupte constituam vel, eu mazim ludus eum, cu mea mundi legere. Has te hinc discere gloriatur. Quo rationibus interpretaris in, graeco tincidunt consectetuer an eum, in est falli virtute constituto.
+          Meis fugit no has, eam at omittam delectus. Congue perpetua cotidieque ei cum, pro homero fierent incorrupte eu. Eu
+          incorrupte constituam vel, eu mazim ludus eum, cu mea mundi legere. Has te hinc discere gloriatur. Quo rationibus
+          interpretaris in, graeco tincidunt consectetuer an eum, in est falli virtute constituto.
 
-Qui odio patrioque no, ei sed civibus detraxit. Id recusabo persequeris eam, est at illud copiosae. Mel ea soluta ponderum dignissim. Affert aliquam intellegam nec et, vel cu partem nominavi platonem.
+          Qui odio patrioque no, ei sed civibus detraxit. Id recusabo persequeris eam, est at illud copiosae.
+          Mel ea soluta ponderum dignissim. Affert aliquam intellegam nec et, vel cu partem nominavi platonem.`}
       </div>
     </main>
   )

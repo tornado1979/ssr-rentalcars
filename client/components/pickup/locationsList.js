@@ -46,7 +46,7 @@ export const LocationsList = (props) => {
   }
 
   return (
-    <ul className="items-list">
+    <ul id="items-list" className="items-list">
       {items.length > 0 && !noResultsFound && getListItems()}
       {items.length > 0 && noResultsFound && <li key="123">{noResultsFound}</li>}
     </ul>
