@@ -1,0 +1,14 @@
+@import '../../breakpoints.scss';
+
+.brands {
+  width: 50rem;
+
+  @media screen and (max-width: $screen-sm) {
+    width: 80%;
+  }
+
+  @media screen and (max-width: $screen-xs) {
+    width: 100%;
+    min-width: 67rem;
+  }
+}

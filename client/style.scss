@@ -14,7 +14,7 @@ body {
 }
 
 * {
-  outline: none;
+  // outline: none;
   box-sizing: border-box;
 }
 
@@ -100,8 +100,11 @@ main {
   background-color: $main-bg;
 
   .pickup-location-container {
-    width:100%;
-    background-color: $pickup-container-bg;
+    width: 63rem;
+
+    @media screen and (max-width: $screen-sm) {
+      width: 100%;
+    }
   }
 }
 
@@ -127,6 +130,19 @@ footer {
   background-position: center;
 }
 
+/* wrap container for pickup-location & brands component*/
+.content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: $pickup-container-bg;
+
+  @media screen and (max-width: $screen-sm) {
+    flex-flow: column;
+    align-items: center;
+  }
+}
+
 /*pickup Component*/
 .pickup-location {
   background-color: $pickup-location-bg;
@@ -143,7 +159,7 @@ footer {
     margin-left: auto;
     margin-right: auto;
   }
-  
+
   @media screen and (max-width: $screen-xs) {
     max-width: 100%;
     margin-left: auto;

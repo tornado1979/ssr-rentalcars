@@ -3,6 +3,7 @@ import propTypes from 'prop-types'
 import PickupLocation from '../../components/pickup'
 import { HorizontalImage } from '../../components/horizontalImage'
 import { Head } from '../../components/head'
+import { Brands } from '../../components/brands'
 
 const Home = (props) => {
   const {
@@ -13,8 +14,11 @@ const Home = (props) => {
     <main>
       <Head location={location} route={route} />
       <HorizontalImage />
-      <div className="pickup-location-container">
-        <PickupLocation />
+      <div className="content">
+        <div className="pickup-location-container">
+          <PickupLocation />
+        </div>
+        <Brands />
       </div>
     </main>
   )
